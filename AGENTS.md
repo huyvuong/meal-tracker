@@ -1,3 +1,13 @@
+## Mandatory: read project documentation before generating code
+
+**Codex must ALWAYS first read the relevant documentation in the project's `/docs` directory before generating or modifying any code.** This means `docs/` at the repository root, not a system-level directory.
+
+- Identify and read every documentation file relevant to the task before writing code, and follow its standards throughout the implementation.
+- For any UI work, always read and follow [`docs/ui.md`](docs/ui.md): only official shadcn/ui components may be used, and no custom UI components may be created.
+- When a task spans multiple areas, consult the relevant documentation for each area. Recheck `/docs` when the scope changes.
+- If no relevant documentation exists, state that gap and follow the remaining project instructions; do not invent undocumented standards.
+- These project documentation requirements apply in addition to the Next.js documentation requirements below.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 ## This is NOT the Next.js you know
