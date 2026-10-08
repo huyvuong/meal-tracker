@@ -1,14 +1,12 @@
-import {
-  ClerkProvider,
-  Show,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider, Show, UserButton } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import { ThemeProvider } from "next-themes";
 import { Suspense } from "react";
+
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -26,50 +24,44 @@ export const metadata: Metadata = {
   description: "Your personal meal tracker.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children, theme }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <ClerkProvider>
-          <header className="border-b border-zinc-200 bg-white font-sans dark:border-zinc-800 dark:bg-black">
-            <nav
-              aria-label="Main navigation"
-              className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-4"
-            >
-              <Link href="/" className="text-lg font-semibold tracking-tight">
-                Meal Tracker
-              </Link>
-              <div className="flex min-h-10 items-center gap-3">
-                <Suspense
-                  fallback={
-                    <span role="status" className="text-sm text-zinc-500">
-                      Loading account…
-                    </span>
-                  }
-                >
-                  <Show when="signed-out">
-                    <SignInButton mode="modal">
-                      <button className="rounded-full px-4 py-2 text-sm font-medium transition-colors hover:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 dark:hover:bg-zinc-900">
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <header className="border-b border-border bg-background font-sans">
+              <nav
+                aria-label="Main navigation"
+                className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-4"
+              >
+                <Link href="/" className="text-lg font-semibold tracking-tight">
+                  Meal Tracker
+                </Link>
+                <div className="flex min-h-10 items-center gap-3">
+                  {theme}
+                  <Suspense fallback={<Skeleton className="h-9 w-36" aria-label="Loading account" />}>
+                    <Show when="signed-out">
+                      <Button variant="ghost" size="lg" render={<Link href="/sign-in" />} nativeButton={false}>
                         Sign in
-                      </button>
-                    </SignInButton>
-                    <SignUpButton mode="modal">
-                      <button className="rounded-full bg-zinc-950 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-800 focus-visible:outline-2 focus-visible:outline-offset-2 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200">
+                      </Button>
+                      <Button size="lg" render={<Link href="/sign-up" />} nativeButton={false}>
                         Sign up
-                      </button>
-                    </SignUpButton>
-                  </Show>
-                  <Show when="signed-in">
-                    <UserButton showName />
-                  </Show>
-                </Suspense>
-              </div>
-            </nav>
-          </header>
-          {children}
+                      </Button>
+                    </Show>
+                    <Show when="signed-in">
+                      <UserButton showName />
+                    </Show>
+                  </Suspense>
+                </div>
+              </nav>
+            </header>
+            {children}
+          </ThemeProvider>
         </ClerkProvider>
       </body>
     </html>

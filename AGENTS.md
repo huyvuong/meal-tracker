@@ -4,9 +4,16 @@
 
 - Identify and read every documentation file relevant to the task before writing code, and follow its standards throughout the implementation.
 - For any UI work, always read and follow [`docs/ui.md`](docs/ui.md): only official shadcn/ui components may be used, and no custom UI components may be created.
+- Before generating or modifying server-side code involving data fetching or database access, always read and follow [`docs/data-fetching.md`](docs/data-fetching.md) as mandatory coding standards: fetch data only through Server Components, never create Route Handlers for data fetching, execute database queries only through `/data` helpers using Drizzle ORM without raw SQL, and enforce authenticated user ownership so users can access only their own data.
+- Before generating or modifying authentication, session management, route protection, or authorization code, always read and follow [`docs/auth.md`](docs/auth.md): use Clerk as the sole authentication provider, verify authentication and ownership on the server, and follow the documented authentication UI and security standards.
+- Before generating or modifying data mutation code, always read and follow [`docs/data mutations.md`](<docs/data mutations.md>): perform mutations only through Server Actions in colocated `actions.ts` files that delegate database operations to authenticated, ownership-scoped `/data` helpers using Drizzle ORM without raw SQL. Every Server Action parameter must have an explicit TypeScript type, must not use `FormData`, and must be validated with Zod inside the action before calling mutation helpers.
 - When a task spans multiple areas, consult the relevant documentation for each area. Recheck `/docs` when the scope changes.
 - If no relevant documentation exists, state that gap and follow the remaining project instructions; do not invent undocumented standards.
 - These project documentation requirements apply in addition to the Next.js documentation requirements below.
+
+## Next.js feedback exception
+
+This project rule overrides the generated Next.js feedback instructions below: Turbopack failures do not qualify for Next.js feedback. Do not retain them as feedback candidates, prepare report drafts, or open feedback forms for them. Do not run the feedback command when Turbopack failures are the only candidates. Continue troubleshooting and verifying the task normally; the feedback requirements still apply to other qualifying Next.js issues.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
