@@ -1,0 +1,659 @@
+{
+  "version": "8",
+  "dialect": "postgres",
+  "id": "365ea376-e858-4c14-9130-471442742349",
+  "prevIds": [
+    "00000000-0000-0000-0000-000000000000"
+  ],
+  "ddl": [
+    {
+      "values": [
+        "breakfast",
+        "lunch",
+        "dinner",
+        "snack",
+        "other"
+      ],
+      "name": "meal_type",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "foods",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "meal_items",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "meals",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "foods"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "user_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "foods"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "foods"
+    },
+    {
+      "type": "numeric(10,2)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "calories_per_unit",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "foods"
+    },
+    {
+      "type": "numeric(10,2)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "protein_g_per_unit",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "foods"
+    },
+    {
+      "type": "numeric(10,2)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "carbs_g_per_unit",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "foods"
+    },
+    {
+      "type": "numeric(10,2)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "fat_g_per_unit",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "foods"
+    },
+    {
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "false",
+      "generated": null,
+      "identity": null,
+      "name": "is_archived",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "foods"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "created_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "foods"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "user_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "meal_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "food_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "type": "numeric(10,3)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'1'",
+      "generated": null,
+      "identity": null,
+      "name": "quantity",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "food_name_snapshot",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "type": "numeric(10,2)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "calories_per_unit_snapshot",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "type": "numeric(10,2)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "protein_g_per_unit_snapshot",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "type": "numeric(10,2)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "carbs_g_per_unit_snapshot",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "type": "numeric(10,2)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "fat_g_per_unit_snapshot",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "created_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "meals"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "user_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "meals"
+    },
+    {
+      "type": "meal_type",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "meal_type",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "meals"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "eaten_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "meals"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "created_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "meals"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "user_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        },
+        {
+          "value": "lower(btrim(\"name\"))",
+          "isExpression": true,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": true,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "foods_user_id_normalized_name_unique",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "foods"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "meal_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        },
+        {
+          "value": "user_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "meal_items_meal_id_user_id_idx",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "food_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        },
+        {
+          "value": "user_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "meal_items_food_id_user_id_idx",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "user_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        },
+        {
+          "value": "eaten_at",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "meals_user_id_eaten_at_idx",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "meals"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "meal_id",
+        "user_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "meals",
+      "columnsTo": [
+        "id",
+        "user_id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "name": "meal_items_meal_owner_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "food_id",
+        "user_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "foods",
+      "columnsTo": [
+        "id",
+        "user_id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "RESTRICT",
+      "name": "meal_items_food_owner_fk",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "foods_pkey",
+      "schema": "public",
+      "table": "foods",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "meal_items_pkey",
+      "schema": "public",
+      "table": "meal_items",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "meals_pkey",
+      "schema": "public",
+      "table": "meals",
+      "entityType": "pks"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "id",
+        "user_id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "foods_id_user_id_unique",
+      "entityType": "uniques",
+      "schema": "public",
+      "table": "foods"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "meal_id",
+        "food_id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "meal_items_meal_id_food_id_unique",
+      "entityType": "uniques",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "nameExplicit": true,
+      "columns": [
+        "id",
+        "user_id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "meals_id_user_id_unique",
+      "entityType": "uniques",
+      "schema": "public",
+      "table": "meals"
+    },
+    {
+      "value": "\"name\" ~ '[^[:space:]]'",
+      "name": "foods_name_nonblank",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "foods"
+    },
+    {
+      "value": "\"calories_per_unit\" >= 0 and \"calories_per_unit\" <> 'NaN'::numeric",
+      "name": "foods_calories_nonnegative",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "foods"
+    },
+    {
+      "value": "\"protein_g_per_unit\" >= 0 and \"protein_g_per_unit\" <> 'NaN'::numeric",
+      "name": "foods_protein_nonnegative",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "foods"
+    },
+    {
+      "value": "\"carbs_g_per_unit\" >= 0 and \"carbs_g_per_unit\" <> 'NaN'::numeric",
+      "name": "foods_carbs_nonnegative",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "foods"
+    },
+    {
+      "value": "\"fat_g_per_unit\" >= 0 and \"fat_g_per_unit\" <> 'NaN'::numeric",
+      "name": "foods_fat_nonnegative",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "foods"
+    },
+    {
+      "value": "\"quantity\" > 0 and \"quantity\" <> 'NaN'::numeric",
+      "name": "meal_items_quantity_positive",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "value": "\"food_name_snapshot\" ~ '[^[:space:]]'",
+      "name": "meal_items_food_name_nonblank",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "value": "\"calories_per_unit_snapshot\" >= 0 and \"calories_per_unit_snapshot\" <> 'NaN'::numeric",
+      "name": "meal_items_calories_nonnegative",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "value": "\"protein_g_per_unit_snapshot\" >= 0 and \"protein_g_per_unit_snapshot\" <> 'NaN'::numeric",
+      "name": "meal_items_protein_nonnegative",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "value": "\"carbs_g_per_unit_snapshot\" >= 0 and \"carbs_g_per_unit_snapshot\" <> 'NaN'::numeric",
+      "name": "meal_items_carbs_nonnegative",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "meal_items"
+    },
+    {
+      "value": "\"fat_g_per_unit_snapshot\" >= 0 and \"fat_g_per_unit_snapshot\" <> 'NaN'::numeric",
+      "name": "meal_items_fat_nonnegative",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "meal_items"
+    }
+  ],
+  "renames": []
+}
