@@ -52,7 +52,7 @@ mock.module("../db/index.ts", {
         if (failWrites) throw new Error("Private database details");
         return update(...args);
       },
-      query: { meals: { findMany: (...args: Parameters<typeof findMany>) => {
+      query: { foods: db.query.foods, mealItems: db.query.mealItems, meals: { findMany: (...args: Parameters<typeof findMany>) => {
         queries++;
         return findMany(...args);
       }, findFirst: (...args: Parameters<typeof findFirst>) => {
@@ -273,7 +273,12 @@ test("edit layout redirects to sign-in with its return URL and uses one not-foun
     { userId: "user_a", mealType: "lunch", eatenAt: new Date(start) },
     { userId: "user_b", mealType: "dinner", eatenAt: new Date(start) },
   ]).returning();
-  const render = (mealId: string) => editMealLayout({ children: "form", params: Promise.resolve({ mealId }) });
+  const render = (mealId: string) => {
+    const boundary = editMealLayout({ children: "form", params: Promise.resolve({ mealId }) });
+    assert.equal(boundary.props.fallback.props["aria-label"], "Loading meal editor");
+    const content = boundary.props.children;
+    return content.type(content.props);
+  };
   userId = null;
   await assert.rejects(render(own.id), /Sign in required/);
   assert.deepEqual(signInReturns, [`/dashboard/meals/${own.id}`]);
@@ -283,7 +288,7 @@ test("edit layout redirects to sign-in with its return URL and uses one not-foun
     await assert.rejects(render(id), /Meal not found/);
   }
   const result = await render(own.id);
-  assert.deepEqual(result.props.meal, { id: own.id, mealType: "lunch", eatenAt: start });
+  assert.deepEqual(result.props.meal, { id: own.id, mealType: "lunch", eatenAt: start, items: [], foods: await db.query.foods.findMany({ columns: { id: true, name: true }, where: { userId: "user_a", isArchived: false }, orderBy: { name: "asc", id: "asc" } }) });
   assert.equal(result.props.children, "form");
 });
 
